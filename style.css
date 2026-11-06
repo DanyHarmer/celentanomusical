@@ -1,0 +1,311 @@
+/* ====== Токены. Если захочешь подогнать под сайт мюзикла — меняй здесь ====== */
+:root {
+  --night: #14103f;
+  --dusk: #3a1c71;
+  --magenta: #d6457a;
+  --sun: #ff9e4a;
+  --gold: #f6c453;
+  --gold-light: #ffe9a8;
+  --gold-deep: #b8821f;
+  --ink: #2a1a05;
+  --font-display: "Unbounded", "Arial Black", sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --notch: 13px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  color: #fff;
+  background:
+    radial-gradient(1.5px 1.5px at 12% 8%, #fff8 99%, #0000),
+    radial-gradient(1px 1px at 78% 5%, #fff9 99%, #0000),
+    radial-gradient(1.5px 1.5px at 44% 14%, #fff7 99%, #0000),
+    radial-gradient(1px 1px at 90% 22%, #fff8 99%, #0000),
+    radial-gradient(1px 1px at 25% 26%, #fff6 99%, #0000),
+    linear-gradient(180deg, #000a 0%, #0006 60%, #0000 100%),
+    url("assets/bg-desktop.webp") center / cover no-repeat fixed;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 18px) 16px calc(env(safe-area-inset-bottom, 0px) + 28px);
+}
+
+.top { display: flex; justify-content: center; }
+.top__logo { display: block; height: 40px; width: auto; max-width: 70%; }
+
+.for {
+  margin: 22px 0 16px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: .02em;
+  color: var(--gold-light);
+}
+
+/* ====== Билет ====== */
+.ticket {
+  filter: drop-shadow(0 18px 28px rgba(10, 6, 40, .55));
+  color: var(--ink);
+}
+
+.ticket__main,
+.ticket__stub {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, #f9d77e 0%, #f6c453 28%, #ffe9a8 47%, #e9ae3a 64%, #f6c453 100%);
+}
+
+/* золотой блик — единственное «само по себе» движение на странице */
+.ticket__main::after,
+.ticket__stub::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%);
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  animation: foil 5.5s ease-in-out infinite;
+}
+@keyframes foil {
+  0%, 55% { background-position: 150% 0; }
+  100% { background-position: -50% 0; }
+}
+
+.ticket__main {
+  padding: 26px 22px 26px;
+  border-radius: 20px 20px 0 0;
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at 0 100%, #0000 97%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 100%, #0000 97%, #000) right / 51% 100% no-repeat;
+          mask:
+    radial-gradient(circle var(--notch) at 0 100%, #0000 97%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 100%, #0000 97%, #000) right / 51% 100% no-repeat;
+}
+
+.ticket__stub {
+  padding: 26px 22px 24px;
+  border-radius: 0 0 20px 20px;
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at 0 0, #0000 97%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 0, #0000 97%, #000) right / 51% 100% no-repeat;
+          mask:
+    radial-gradient(circle var(--notch) at 0 0, #0000 97%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 0, #0000 97%, #000) right / 51% 100% no-repeat;
+}
+.ticket__stub::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  border-top: 2px dashed rgba(42, 26, 5, .4);
+}
+
+.ticket__brand {
+  margin: 0 0 14px;
+  font-size: .8rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--gold-deep);
+  filter: brightness(.7);
+}
+
+.ticket__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 11.5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -.01em;
+}
+
+.ticket__sub {
+  margin: 8px 0 18px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.ticket__text {
+  margin: 0 0 20px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.5;
+  max-width: 34ch;
+}
+
+.show {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding-top: 18px;
+  border-top: 1px solid rgba(42, 26, 5, .25);
+}
+.show__poster {
+  flex: none;
+  width: 84px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(42, 26, 5, .35);
+  background: var(--dusk);
+}
+.show__name {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: .95rem;
+  line-height: 1.3;
+}
+.show__meta { margin: 0 0 3px; font-size: .84rem; line-height: 1.4; font-weight: 600; opacity: .85; }
+
+/* ====== Кнопки и поля ====== */
+.view[hidden] { display: none; }
+
+.btn {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 14px;
+  font: 800 1.05rem/1.2 var(--font-body);
+  color: var(--gold);
+  background: var(--night);
+  box-shadow: 0 6px 14px rgba(20, 16, 63, .35);
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active:not(:disabled) { transform: scale(.98); }
+.btn:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
+.btn--ghost { color: var(--ink); background: transparent; border: 2px solid var(--ink); box-shadow: none; }
+
+.link {
+  display: block;
+  margin: 14px auto 0;
+  text-align: center;
+  font: 700 .92rem/1.2 var(--font-body);
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.link--btn { background: none; border: 0; padding: 6px; cursor: pointer; }
+
+:focus-visible { outline: 3px solid var(--night); outline-offset: 3px; }
+.finale :focus-visible { outline-color: var(--gold); }
+
+.field__label {
+  display: block;
+  margin: 0 0 8px;
+  font-weight: 800;
+  font-size: .95rem;
+}
+.field__input {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 14px;
+  border: 2px solid var(--night);
+  border-radius: 12px;
+  font: 700 1.1rem var(--font-body);
+  color: var(--ink);
+  background: rgba(255, 255, 255, .6);
+  color-scheme: light;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field__hint { margin: 8px 0 20px; font-size: .84rem; font-weight: 600; opacity: .8; }
+.field__hint.is-error { opacity: 1; color: #8a1030; font-weight: 800; }
+
+.times { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.time {
+  min-height: 56px;
+  border: 2px solid var(--night);
+  border-radius: 12px;
+  font: 800 1.25rem var(--font-body);
+  color: var(--night);
+  background: transparent;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.time[aria-checked="true"] { background: var(--night); color: var(--gold); }
+
+/* ====== Штамп «Дата зафиксирована» ====== */
+.stamp {
+  margin: 4px 0 22px;
+  padding: 16px 12px;
+  text-align: center;
+  border: 3px double var(--night);
+  border-radius: 14px;
+  color: var(--night);
+  transform: rotate(-2deg);
+  animation: stamp .45s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+@keyframes stamp {
+  from { transform: rotate(-8deg) scale(1.5); opacity: 0; }
+  to { transform: rotate(-2deg) scale(1); opacity: 1; }
+}
+.stamp__title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.stamp__date { margin: 0; font-weight: 800; font-size: 1.15rem; text-transform: capitalize; }
+.stamp__time { margin: 4px 0 0; font-family: var(--font-display); font-weight: 700; font-size: 1.9rem; }
+
+.foot { margin-top: 22px; text-align: center; font-size: .85rem; }
+.foot a { color: var(--gold-light); text-underline-offset: 3px; }
+
+/* ====== Салют ====== */
+.finale {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(14, 10, 48, .88);
+  animation: fade .4s ease both;
+}
+.finale[hidden] { display: none; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+#fireworks { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.finale__content { position: relative; text-align: center; max-width: 420px; }
+.finale__ok {
+  margin: 0 0 14px;
+  font-weight: 800;
+  font-size: .95rem;
+  color: var(--gold-light);
+}
+.finale__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 12vw, 3.4rem);
+  line-height: 1.12;
+  background: linear-gradient(100deg, var(--gold-light), var(--gold) 45%, var(--sun));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  animation: rise .9s cubic-bezier(.2, .9, .3, 1.1) .15s both;
+}
+@keyframes rise { from { transform: translateY(24px) scale(.9); opacity: 0; } to { transform: none; opacity: 1; } }
+.finale__name { margin: 12px 0 8px; font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; color: #fff; }
+.finale__when { margin: 0 0 28px; font-weight: 700; color: var(--gold-light); text-transform: capitalize; }
+.finale__close { color: var(--ink); background: var(--gold); box-shadow: 0 6px 20px rgba(246, 196, 83, .35); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket__main::after, .ticket__stub::after { animation: none; display: none; }
+  .stamp, .finale, .finale__title { animation: none; }
+}
